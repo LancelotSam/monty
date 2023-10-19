@@ -5,7 +5,7 @@
  * @head:the head os the stack
  * Return:void
  */
-void _pall(const stack_s *head)
+void _pall(const stack_t *head)
 {
 	while (head)
 	{

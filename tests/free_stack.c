@@ -5,9 +5,9 @@
  * @head: this is the head of the stack
  * Return:void
  */
-void free_stack(stack_s *head)
+void free_stack(stack_t *head)
 {
-	stack_s *temp;
+	stack_t *temp;
 
 	while (head)
 	{

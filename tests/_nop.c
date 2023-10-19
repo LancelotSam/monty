@@ -6,8 +6,8 @@
  * @idx: the counter or current index
  * Return:void
  */
-void _nop(stack_s **head, unsigned int idx)
+void _nop(stack_t **head, unsigned int idx)
 {
-	(void) counter;
+	(void) idx;
 	(void) head;
 }
