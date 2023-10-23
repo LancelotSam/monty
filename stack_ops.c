@@ -8,17 +8,17 @@
  */
 void f_pall(stack_t **head, unsigned int line_no)
 {
-        stack_t *h;
-        (void) line_no;
+	stack_t *h;
+	(void) line_no;
 
-        h = *head;
-        if (h == NULL)
-                return;
-        while (h)
-        {
-                printf("%d\n", h->n);
-                h = h->next;
-        }
+	h = *head;
+	if (h == NULL)
+		return;
+	while (h)
+	{
+		printf("%d\n", h->n);
+		h = h->next;
+	}
 }
 
 /**
@@ -30,8 +30,8 @@ void f_pall(stack_t **head, unsigned int line_no)
  */
 void f_nop(stack_t **head, unsigned int line_no)
 {
-        (void) line_no;
-        (void) head;
+	(void) line_no;
+	(void) head;
 }
 
 /**
@@ -43,19 +43,19 @@ void f_nop(stack_t **head, unsigned int line_no)
  */
 void f_pop(stack_t **head, unsigned int line_no)
 {
-        stack_t *h;
+	stack_t *h;
 
-        if (*head == NULL)
-        {
-                fprintf(stderr, "L%d: can't pop an empty stack\n", line_no);
-                fclose(bus.file);
-                free(bus.content);
-                free_stack(*head);
-                exit(EXIT_FAILURE);
-        }
-        h = *head;
-        *head = h->next;
-        free(h);
+	if (*head == NULL)
+	{
+		fprintf(stderr, "L%d: can't pop an empty stack\n", line_no);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	h = *head;
+	*head = h->next;
+	free(h);
 }
 /**
  * f_top-this is the main function
@@ -66,9 +66,9 @@ void f_pop(stack_t **head, unsigned int line_no)
  */
 void f_top(stack_t **head, unsigned int line_no)
 {
-        (void)head;
-        (void)line_no;
-        bus.lifi = 0;
+	(void)head;
+	(void)line_no;
+	bus.lifi = 0;
 }
 
 /**
@@ -79,12 +79,12 @@ void f_top(stack_t **head, unsigned int line_no)
  */
 void free_stack(stack_t *head)
 {
-        stack_t *temp;
+	stack_t *temp;
 
-        while (head)
-        {
-                temp = head->next;
-                free(head);
-                head = temp;
-        }
+	while (head)
+	{
+		temp = head->next;
+		free(head);
+		head = temp;
+	}
 }

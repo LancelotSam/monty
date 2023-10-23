@@ -8,26 +8,26 @@
  */
 void print_char(stack_t **head, unsigned int line_no)
 {
-        stack_t *h;
+	stack_t *h;
 
-        h = *head;
-        if (!h)
-        {
-                fprintf(stderr, "L%d: can't pchar, stack empty\n", line_no);
-                fclose(bus.file);
-                free(bus.content);
-                free_stack(*head);
-                exit(EXIT_FAILURE);
-        }
-        if (h->n > 127 || h->n < 0)
-        {
-                fprintf(stderr, "L%d: can't pchar, value out of range\n", line_no);
-                fclose(bus.file);
-                free(bus.content);
-                free_stack(*head);
-                exit(EXIT_FAILURE);
-        }
-        printf("%c\n", h->n);
+	h = *head;
+	if (!h)
+	{
+		fprintf(stderr, "L%d: can't pchar, stack empty\n", line_no);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	if (h->n > 127 || h->n < 0)
+	{
+		fprintf(stderr, "L%d: can't pchar, value out of range\n", line_no);
+		fclose(bus.file);
+		free(bus.content);
+		free_stack(*head);
+		exit(EXIT_FAILURE);
+	}
+	printf("%c\n", h->n);
 }
 
 /**
@@ -39,18 +39,18 @@ void print_char(stack_t **head, unsigned int line_no)
  */
 void print_str(stack_t **head, unsigned int line_no)
 {
-        stack_t *h;
-        (void)line_no;
+	stack_t *h;
+	(void)line_no;
 
-        h = *head;
-        while (h)
-        {
-                if (h->n > 127 || h->n <= 0)
-                {
-                        break;
-                }
-                printf("%c", h->n);
-                h = h->next;
-        }
-        printf("\n");
+	h = *head;
+	while (h)
+	{
+		if (h->n > 127 || h->n <= 0)
+		{
+			break;
+		}
+		printf("%c", h->n);
+		h = h->next;
+	}
+	printf("\n");
 }
