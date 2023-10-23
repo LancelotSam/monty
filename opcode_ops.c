@@ -8,17 +8,29 @@
  */
 void add_nodes(stack_t **head, unsigned int line_no)
 {
-	int sum;
+        stack_t *h;
+        int len = 0, temp;
 
-	if (*head == NULL || (*head)->next == NULL || head == NULL)
-		err_2(8, line_no, "add");
-	(*head) = (*head)->next;
-	sum = (*head)->n + (*head)->prev->n;
-	(*head)->n = sum;
-	free((*head)->prev);
-	(*head)->prev = NULL;
+        h = *head;
+        while (h)
+        {
+                h = h->next;
+                len++;
+        }
+        if (len < 2)
+        {
+                fprintf(stderr, "L%d: can't add, stack too short\n", line_no);
+                fclose(bus.file);
+                free(bus.content);
+                free_stack(*head);
+                exit(EXIT_FAILURE);
+        }
+        h = *head;
+        temp = h->n + h->next->n;
+        h->next->n = temp;
+        *head = h->next;
+        free(h);
 }
-
 /**
  * sub_nodes-this is the main function
  * it subtracts the top wo elements on tthe stack
@@ -28,17 +40,27 @@ void add_nodes(stack_t **head, unsigned int line_no)
  */
 void sub_nodes(stack_t **head, unsigned int line_no)
 {
-	int diff;
+        stack_t *aux;
+        int sus, nodes;
 
-	if (*head == NULL || (*head)->next == NULL || head == NULL)
-		err_2(8, line_no, "sub");
-	(*head) = (*head)->next;
-	diff = (*head)->n - (*head)->prev->n;
-	*(head)->n = diff;
-	free((*head)->prev);
-	(*head)->prev = NULL;
+        aux = *head;
+        for (nodes = 0; aux != NULL; nodes++)
+                aux = aux->next;
+        if (nodes < 2)
+        {
+                fprintf(stderr, "L%d: can't sub, stack too short\n", line_no);
+                fclose(bus.file);
+                free(bus.content);
+                free_stack(*head);
+                exit(EXIT_FAILURE);
+        }
+        aux = *head;
+        sus = aux->next->n - aux->n;
+        aux->next->n = sus;
+        *head = aux->next;
+        free(aux);
+        free(aux);
 }
-
 /**
  * div_nodes-this is the main function
  * It divides nodes
@@ -48,19 +70,37 @@ void sub_nodes(stack_t **head, unsigned int line_no)
  */
 void div_nodes(stack_t **head, unsigned int line_no)
 {
-	int div;
+        stack_t *h;
+        int len = 0, temp;
 
-	if (*head == NULL || (*head)->next == NULL || head == NULL)
-		err_2(8, line_no, "div");
-	if ((*head)->n == 0)
-		err_3(9, line_no);
-	(*head) = (*head)->next;
-	div = (*head)->n / (*head)->prev->n;
-	(*head)->n = div;
-	free((*head)->prev);
-	(*head)->prev = NULL;
+        h = *head;
+        while (h)
+        {
+                h = h->next;
+                len++;
+        }
+        if (len < 2)
+        {
+                fprintf(stderr, "L%d: can't div, stack too short\n", line_no);
+                fclose(bus.file);
+                free(bus.content);
+                free_stack(*head);
+                exit(EXIT_FAILURE);
+        }
+        h = *head;
+        if (h->n == 0)
+        {
+                fprintf(stderr, "L%d: division by zero\n", line_no);
+                fclose(bus.file);
+                free(bus.content);
+                free_stack(*head);
+                exit(EXIT_FAILURE);
+        }
+        temp = h->next->n / h->n;
+        h->next->n = temp;
+        *head = h->next;
+        free(h);
 }
-
 /**
  * swap_nodes-this is the main function
  * It swaps nodes
@@ -70,18 +110,27 @@ void div_nodes(stack_t **head, unsigned int line_no)
  */
 void swap_nodes(stack_t **head, unsigned int line_no)
 {
-	stack_t *temp;
+        stack_t *h;
+        int len = 0, temp;
 
-	if (*head == NULL || (*head)->next == NULL || head == NULL)
-		err_2(8, line_no, "swap");
-	tmp = (*head)->next;
-	(*head)->next = tmp->next;
-	if (tmp->next != NULL)
-		temp->next->prev = *head;
-	temp->next = *head;
-	(*head)->prev = tmp;
-	tmp->prev = NULL;
-	*head = tmp;
+        h = *head;
+        while (h)
+        {
+                h = h->next;
+                len++;
+        }
+if (len < 2)
+        {
+                fprintf(stderr, "L%d: can't swap, stack too short\n", line_no);
+                fclose(bus.file);
+                free(bus.content);
+                free_stack(*head);
+                exit(EXIT_FAILURE);
+        }
+        h = *head;
+        temp = h->n;
+        h->n = h->next->n;
+        h->next->n = temp;
 }
 
 /**
@@ -91,15 +140,28 @@ void swap_nodes(stack_t **head, unsigned int line_no)
  * @line_no: line number on the opcode
  * Return:void
  */
-void mul_nodes(stack_t *head, unsigned int line_no)
+void mul_nodes(stack_t **head, unsigned int line_no)
 {
-	int prod;
+        stack_t *h;
+        int len = 0, temp;
 
-	if (*head == NULL || (*head)->next == NULL || head == NULL)
-		err_2(8, line_no, "mul");
-	(*head) = (*head)->next;
-	prod = (*head)->n * (*head)->prev->n;
-	(*head)->n = prod;
-	free((*head)->prev);
-	(*head)->prev = NULL;
+        h = *head;
+        while (h)
+        {
+                h = h->next;
+                len++;
+        }
+        if (len < 2)
+        {
+                fprintf(stderr, "L%d: can't mul, stack too short\n", line_no);
+                fclose(bus.file);
+                free(bus.content);
+                free_stack(*head);
+                exit(EXIT_FAILURE);
+        }
+        h = *head;
+        temp = h->next->n * h->n;
+        h->next->n = temp;
+        *head = h->next;
+        free(h);
 }
